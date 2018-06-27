@@ -1,4 +1,4 @@
 # PKseudunLuontoAlueet
-Ohjelma näyttää pk-seudun luontoalueet, yhteystiedot ja reitit alueille.  
-Tarkoituksena on käyttää Pääkaupunkiseudun palvelurekisterin REST-rajapintaa.  
-Ohjelma tarjoaa myös vaihtuvana tekstinä tietoa retkeilyn ja luonnossa liikkumisen hyödyistä.
+Ohjeman tarkoituksena on kerätä käyttäjien lisäämiä luontoalueita kartalle.
+Kayäyttäjä voi merkata alueen kartalle, ja kirjoittaa siitä kuvauksen.
+Tarkoituksena on käyttää GoogleMaps rajapintaa. 
