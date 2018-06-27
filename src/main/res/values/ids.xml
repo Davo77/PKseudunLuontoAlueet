@@ -1,0 +1,4 @@
+<resources>
+    <item name="infoWindowContainer1" type="id" />
+    <item name="infoWindowContainer2" type="id" />
+</resources>
