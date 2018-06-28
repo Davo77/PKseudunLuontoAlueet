@@ -28,7 +28,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/pinetree_icon_round"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -47,7 +47,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MainMapsActivity"
+            android:name=".LoginActivity"
             android:label="@string/title_activity_main_maps">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -55,6 +55,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".MainMapsActivity" />
     </application>
 
 </manifest>

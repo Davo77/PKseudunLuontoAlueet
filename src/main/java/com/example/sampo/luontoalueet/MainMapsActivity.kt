@@ -19,7 +19,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-
+import com.google.firebase.auth.FirebaseAuth
 
 
 class MainMapsActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -38,19 +38,19 @@ class MainMapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mFusedLocationProviderClient: FusedLocationProviderClient
 
-
-
-
+    private var mAuth: FirebaseAuth? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_maps)
 
+        mAuth = FirebaseAuth.getInstance()
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
                 .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
 
 
         // Construct a GeoDataClient.
@@ -62,6 +62,9 @@ class MainMapsActivity : AppCompatActivity(), OnMapReadyCallback {
         // Construct a FusedLocationProviderClient.
         mFusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this)
     }
+
+
+
 
 
     /**
@@ -83,7 +86,7 @@ class MainMapsActivity : AppCompatActivity(), OnMapReadyCallback {
         // Get the current location of the device and set the position of the map.
         getDeviceLocation()
 
-        //PRESSING WILL ADD MARKER
+       //PRESSING WILL ADD MARKER
         mMap.setOnMapClickListener(GoogleMap.OnMapClickListener { point ->
             val builder: AlertDialog.Builder
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -92,12 +95,18 @@ class MainMapsActivity : AppCompatActivity(), OnMapReadyCallback {
                 builder = AlertDialog.Builder(this)
             }
             val marker = MarkerOptions().position(point)
+
+
             builder.setTitle("Are you sure you want to add a map location here?")
-                    .setMessage("Are you sure you want to add a map location here?")
+
                     .setPositiveButton(android.R.string.yes, DialogInterface.OnClickListener { dialog, which ->
                         mMap.addMarker(marker)
                                 //CUSTOM MARKER
                                 .setIcon(BitmapDescriptorFactory.fromResource(R.mipmap.pinetree_foreground))
+
+
+
+
                     })
 
                     .setNegativeButton(android.R.string.no, DialogInterface.OnClickListener { dialog, which ->
@@ -108,7 +117,7 @@ class MainMapsActivity : AppCompatActivity(), OnMapReadyCallback {
             true
 /*
 //Adding info window to marker
-            mMap.addMarker(MarkerOptions().position(point))
+         /  mMap.addMarker(MarkerOptions().position(point))
                     //CUSTOM MARKER
                     .setIcon(BitmapDescriptorFactory.fromResource(R.mipmap.pinetree_foreground))
 
@@ -122,16 +131,35 @@ class MainMapsActivity : AppCompatActivity(), OnMapReadyCallback {
                     .icon(BitmapDescriptorFactory.fromResource(R.mipmap.pinetree_foreground)) */
 
 
-            val mapInfoWindowFragment = supportFragmentManager.findFragmentById(R.id.infoWindowMap) as MapInfoWindowFragment
+
+                val mapInfoWindowFragment = supportFragmentManager.findFragmentById(R.id.infoWindowMap) as? MapInfoWindowFragment
+                //Set Custom InfoWindow
+                val infoWindow = InfoWindow(point, InfoWindow.MarkerSpecification(0, 0), mapInfoWindowFragment)
+                // Shows the InfoWindow or hides it if it is already opened.
+                mapInfoWindowFragment?.infoWindowManager()?.toggle(infoWindow, false)
+
+                mapInfoWindowFragment?.infoWindowManager()?.show(infoWindow)
 
 
-            //Set Custom InfoWindow
-             val infoWindow = InfoWindow(point, InfoWindow.MarkerSpecification(0, 0), mapInfoWindowFragment)
-            // Shows the InfoWindow or hides it if it is already opened.
-            mapInfoWindowFragment.infoWindowManager()!!.toggle(infoWindow, true);
 
 
-        })
+            })
+
+
+
+           val infoWindowManager = InfoWindowManager(supportFragmentManager)
+
+            infoWindowManager.setWindowShowListener(object : InfoWindowManager.WindowShowListener {
+                override fun onWindowShowStarted(infoWindow: InfoWindow) {Log.e("testi", "onWindowShowStarted")}
+
+                override fun onWindowShown(infoWindow: InfoWindow) {Log.e("testi", "onWindowShown")}
+
+                override fun onWindowHideStarted(infoWindow: InfoWindow) {Log.e("testi", "onWindowHideStarted")}
+
+                override fun onWindowHidden(infoWindow: InfoWindow) {Log.e("testi", "onWindowHidden")}
+            })
+
+
 
 
         //PRESSING ALREADY VISIBLE MARKER SHOWS OPTION TO DELETE IT
@@ -239,8 +267,16 @@ class MainMapsActivity : AppCompatActivity(), OnMapReadyCallback {
             Log.e("Exception: %s", e.message)
         }
 
+
     }
 
 }
+
+
+
+
+
+
+
 
 

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "184048643377",
+    "firebase_url": "https://luontoalueet.firebaseio.com",
+    "project_id": "luontoalueet",
+    "storage_bucket": "luontoalueet.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:184048643377:android:11f0fab17c43312d",
+        "android_client_info": {
+          "package_name": "com.example.sampo.luontoalueet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "184048643377-dpc293tr835f8piorgihppii8k9q4ajh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCUT1fHtKhiT_ADcrCnYk6oLhbdgUm0i5g"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

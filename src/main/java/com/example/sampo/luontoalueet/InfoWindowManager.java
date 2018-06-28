@@ -21,7 +21,6 @@ import android.view.animation.DecelerateInterpolator;
 import android.view.animation.ScaleAnimation;
 import android.widget.FrameLayout;
 
-import com.appolica.mapanimations.R;
 import com.example.sampo.luontoalueet.Animation.SimpleAnimationListener;
 import com.example.sampo.luontoalueet.customview.DisallowInterceptLayout;
 import com.example.sampo.luontoalueet.customview.TouchInterceptFrameLayout;
